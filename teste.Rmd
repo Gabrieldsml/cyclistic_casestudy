@@ -1,0 +1,263 @@
+---
+title: "Cyclistic case study"
+output: html_document
+date: "2023-04-04"
+---
+
+# CYCLISTIC case study.
+
+## 1. Introduction
+
+This is a case study from one of the courses that I'm doing to learn data analysis/data science and machine learning. The Cyclistic case study is focused on data analysis.
+
+I will be following these steps of the data analysis process:
+
+-   Ask
+
+-   Prepare
+
+-   Process
+
+-   Analyze
+
+-   Share
+
+-   Act
+
+#### 1.1 Scenario
+
+You are a junior data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. The director of marketing believes the company's future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand how casual riders and annual members use Cyclistic bikes differently. From these insights, your team will design a new marketing strategy to convert casual riders into annual members. But first, Cyclistic executives must approve your recommendations, so they must be backed up with compelling data insights and professional data visualizations.
+
+#### 1.2 Characters and teams
+
+-   Cyclistic: A bike-share program that features more than 5,800 bicycles and 600 docking stations. Cyclistic sets itself apart by also offering reclining bikes, hand tricycles, and cargo bikes, making bike-share more inclusive to people with disabilities and riders who can't use a standard two-wheeled bike. The majority of riders opt for traditional bikes; about 8% of riders use the assistive options. Cyclistic users are more likely to ride for leisure, but about 30% use them to commute to work each day.
+-   Lily Moreno: The director of marketing and your manager. Moreno is responsible for the development of campaigns and initiatives to promote the bike-share program. These may include email, social media, and other channels.
+-   Cyclistic marketing analytics team: A team of data analysts who are responsible for collecting, analyzing, and reporting data that helps guide Cyclistic marketing strategy. You joined this team six months ago and have been busy learning about Cyclistic's mission and business goals --- as well as how you, as a junior data analyst, can help Cyclistic achieve them.
+-   Cyclistic executive team: The notoriously detail-oriented executive team will decide whether to approve the recommended marketing program.
+
+#### 1.3 About the company
+
+In 2016, Cyclistic launched a successful bike-share offering. Since then, the program has grown to a fleet of 5,824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime. Until now, Cyclistic's marketing strategy relied on building general awareness and appealing to broad consumer segments. One approach that helped make these things possible was the flexibility of its pricing plans: single-ride passes, full-day passes, and annual memberships. Customers who purchase single-ride or full-day passes are referred to as casual riders. Customers who purchase annual memberships are Cyclistic members. Cyclistic's finance analysts have concluded that annual members are much more profitable than casual riders. Although the pricing flexibility helps Cyclistic attract more customers, Moreno believes that maximizing the number of annual members will be key to future growth. Rather than creating a marketing campaign that targets all-new customers, Moreno believes there is a very good chance to convert casual riders into members. She notes that casual riders are already aware of the Cyclistic program and have chosen Cyclistic for their mobility needs. Moreno has set a clear goal: Design marketing strategies aimed at converting casual riders into annual members. In order to do that, however, the marketing analyst team needs to better understand how annual members and casual riders differ, why casual riders would buy a membership, and how digital media could affect their marketing tactics. Moreno and her team are interested in analyzing the Cyclistic historical bike trip data to identify trends.
+
+## 2. Asking
+
+**Three questions will guide the future marketing program:**
+
+1.  How do annual members and casual riders use Cyclistic bikes differently?
+
+    *(this question was assigned to me.)*
+
+2.  Why would casual riders buy Cyclistic annual memberships?
+
+3.  How can Cyclistic use digital media to influence casual riders to become members?
+
+**I will be producing a report with the following derivables:**
+
+1.  A clear statement of the business task
+
+2.  A description of all data sources used
+
+3.  Documentation of any cleaning or manipulation of data
+
+4.  A summary of the data analysis
+
+5.  Supporting visualizations and key findings
+
+6.  Top three recommendations based on my analysis
+
+**During this case study, i will be working with data to help the company to find ways to maximize the quantity of annual memberships.My insights will support Cyclistic to understand how Annual members and Casual Riders use Cyclistic bikes differently, and with the analysis, help the company to achieve the goal of maximizing annual memberships**.
+
+##3. Preparing
+
+You can found the data collected in this [link](https://divvy-tripdata.s3.amazonaws.com/index.html) .
+
+This data is the last 12 months(from Mar 2022 to Feb 2022) of Cyclistic trip data and there is no issues with credibility or bias on this data, it was collected by Cyclistic and it regards all users with no preference.
+
+License can be found [here](https://ride.divvybikes.com/data-license-agreement). It's **prohibited** to use riders' personally identifiable information.
+
+I verified the data integrity by cleaning and checking the data and there are no problems with the data.
+
+*How does it help you answer your question? ( CHECK it later)*
+
+##4. Processing
+
+In this case study, I will be using R(Rstudio and R Markdown) to clean, manipulate, analyze and create data visualizations.
+
+*Loading libraries* *Tidyverse includes lubridate, ggplot2, dplyr, tidyr, tibble and others* *Janitor is used to compare columns in the dataset*
+
+```{r}
+library(tidyverse)
+library(janitor)
+```
+
+**Reading files:**
+
+```{r}
+
+tripdata2022_03 = read_csv("csv_files/202203-divvy-tripdata.csv")
+tripdata2022_04 = read_csv("csv_files/202204-divvy-tripdata.csv")
+tripdata2022_05 = read_csv("csv_files/202205-divvy-tripdata.csv")
+tripdata2022_06 = read_csv("csv_files/202206-divvy-tripdata.csv")
+tripdata2022_07 = read_csv("csv_files/202207-divvy-tripdata.csv")
+tripdata2022_08 = read_csv("csv_files/202208-divvy-tripdata.csv")
+tripdata2022_09 = read_csv("csv_files/202209-divvy-publictripdata.csv")
+tripdata2022_10 = read_csv("csv_files/202210-divvy-tripdata.csv")
+tripdata2022_11 = read_csv("csv_files/202211-divvy-tripdata.csv")
+tripdata2022_12 = read_csv("csv_files/202212-divvy-tripdata.csv")
+tripdata2023_01 = read_csv("csv_files/202301-divvy-tripdata.csv")
+tripdata2023_02 = read_csv("csv_files/202302-divvy-tripdata.csv")
+```
+
+*Checking if column names are the same in each dataset in order to bind, also checking structure.*
+
+```{r}
+library(janitor)
+compare_df_cols(tripdata2022_03, tripdata2022_04,tripdata2022_05,tripdata2022_06,tripdata2022_07,tripdata2022_08,tripdata2022_09,tripdata2022_10,tripdata2022_11,tripdata2022_12,tripdata2023_01,tripdata2023_02)
+
+str(tripdata2022_03)
+str(tripdata2022_04)
+#...
+
+
+```
+
+*They all have the same name, so it's possible to bind, i do not need to rename, datatype are also equal, do not need to change*
+
+*Now, i need to bind all datasets into one.*
+
+```{r}
+all_trips = bind_rows(tripdata2022_03, tripdata2022_04,tripdata2022_05,tripdata2022_06,tripdata2022_07,tripdata2022_08,tripdata2022_09,tripdata2022_10,tripdata2022_11,tripdata2022_12,tripdata2023_01,tripdata2023_02)
+  
+```
+
+*Checking the new dataset*
+
+```{r}
+str(all_trips)
+```
+
+*The new dataset has 5,829,084 rows and 13 columns.*
+
+*Now, i need to remove not necessary columns from the dataset*
+
+```{r}
+all_trips = all_trips %>%
+  select(-c(start_lat, start_lng, end_lat, end_lng))
+str(all_trips)
+```
+
+*Checking data summary*
+
+```{r}
+summary(all_trips)
+```
+
+*Used this code chunck to check if the column member_casual is correctly separated in two different attributes, similar to distinct function in SQL*
+
+```{r}
+
+  table(all_trips$member_casual)
+
+  
+```
+
+*Creating column ride_length and day_of_week to help me making analysis*
+
+```{r}
+ all_trips = mutate(all_trips,ride_length = ended_at - started_at)
+ all_trips = mutate(all_trips, day_of_week = wday(started_at, label= TRUE))
+```
+
+*Checking structure and checking if ride_length is numerical*
+
+```{r}
+str(all_trips)
+is.numeric(all_trips$ride_length)
+```
+
+*Removing bad data where bykes were taken out to do maintenance*
+
+```{r}
+all_trips_v2 = all_trips[!(all_trips$start_station_name == "HQ QR" | all_trips$ride_length<0),]
+
+```
+
+*Checking missing values*
+
+```{r}
+sum(is.na(all_trips_v2))
+
+```
+
+*Dropping rows with missing values*
+
+```{r}
+all_trips_v2 = all_trips_v2 %>% drop_na()
+```
+
+## 5. Analyzing
+
+In this section, I will be doing analysis to help me answer the question assigned to me:
+
+**How do annual members and casual riders use Cyclistic bikes differently?**
+
+*Descriptive analysis on ride_length*
+
+```{r}
+summary(all_trips_v2$ride_length, )
+```
+
+*Comparing mean, median, max and min ride length of casual and annual members*
+
+```{r}
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = mean)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = median)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = max)
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual, FUN = min)
+
+```
+
+*The max ride length from casual riders are 2061244 secs, it's not usual, because its a long time and not similar to member subscriptions at all, let me check it more deeply.*
+
+```{r}
+all_trips_v2[all_trips_v2$ride_length > 1000000, ]
+```
+
+*Some trips have a huge amount of time for casual riders,should it be normal or not? considering that i can't ask the company because it's a case study, i'm not going to remove it. But this is something to check*
+
+```{r}
+all_trips_v2[all_trips_v2$ride_length < 2, ]
+```
+
+*Following the same way of thought, some trips have less than 2 seconds of duration, including 0 seconds, is it a mistake?*
+
+*Comparing the duration of rides mean for casual and annual members for each day of the week*
+
+```{r}
+aggregate(all_trips_v2$ride_length ~ all_trips_v2$member_casual + all_trips_v2$day_of_week, FUN = mean)
+```
+
+*Adding number_of_rides to the comparison and creating a visualization to see the difference between casual and annual members number of rides per week day*
+
+```{r}
+all_trips_v2 %>%
+  group_by(member_casual, day_of_week) %>%
+  summarise(number_of_rides = n(), average_duration = mean(ride_length)) %>%
+  arrange(day_of_week) %>%
+  ggplot(aes(x = day_of_week, y = number_of_rides, fill = member_casual)) + 
+  geom_col(position = "dodge")
+
+
+```
+
+*Now, comparing average duration of rides*
+
+```{r}
+all_trips_v2 %>%
+  group_by(member_casual, day_of_week) %>%
+  summarise(number_of_rides = n(), average_duration = mean(ride_length)) %>%
+  arrange(day_of_week) %>%
+  ggplot(aes(x = day_of_week, y = average_duration, fill = member_casual)) + 
+  geom_col(position = "dodge")
+```
+
