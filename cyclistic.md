@@ -621,13 +621,8 @@ str(all_trips)
     ##   ..- attr(*, "units")= chr "secs"
     ##  $ day_of_week       : Ord.factor w/ 7 levels "Sun"<"Mon"<"Tue"<..: 2 4 4 3 2 2 5 7 5 6 ...
 
-``` r
-is.numeric(all_trips$ride_length)
-```
 
-    ## [1] FALSE
-
-*Removing bad data where bykes were taken out to do maintenance*
+*Removing bad data where bikes were taken out to do maintenance*
 
 ``` r
 all_trips_v2 = all_trips[!(all_trips$start_station_name == "HQ QR" | all_trips$ride_length<0),]
