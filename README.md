@@ -63,7 +63,7 @@ In 2016, Cyclistic launched a successful bike-share offering. Since then, the pr
 
 **During this case study, i will be working with data to help the company to find ways to maximize the quantity of annual memberships.My insights will support Cyclistic to understand how Annual members and Casual Riders use Cyclistic bikes differently, and with the analysis, help the company to achieve the goal of maximizing annual memberships**.
 
-##3. Preparing
+## 3. Preparing
 
 You can found the data collected in this [link](https://divvy-tripdata.s3.amazonaws.com/index.html) .
 
