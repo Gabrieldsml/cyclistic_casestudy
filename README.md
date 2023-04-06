@@ -1,6 +1,6 @@
 # CYCLISTIC case study.
 
-###Please check cyclistic.md to see the notebook of the case study.
+### Please check cyclistic.md to see the notebook of the case study.
 
 ## 1. Introduction
 
