@@ -860,9 +860,6 @@ Both users, do more trips with classic bikes. However, 65% of members
 uses more classic bike while just 50% of casual users prefer classic
 bikes.
 
-*Is it because of the quantity of electric bikes available? Should ask
-the team.*
-
 Casual users have longer rides than annual members. *1421 seconds mean
 against 741 seconds respectively.*
 
